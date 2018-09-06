@@ -16,5 +16,6 @@ __How to use:__
 - rightclick, inspect and open console
 
 __Thanks to:__
+
 These code snippets are based on code snippets of the OME-team and
 with a huge support of Niko Ehrenfeuchter and Laurent Guerard.
