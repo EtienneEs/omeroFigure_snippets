@@ -58,6 +58,7 @@ figureModel.panels.models.forEach(p => {
   };
 });
 
+// this is just a test line
 
 
 // the code below deletes all labels of a picture
