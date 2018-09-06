@@ -41,11 +41,6 @@ figureModel.panels.getSelected().forEach(p => {
 
 figureModel.panels.models.forEach(p => {
   var j = p.toJSON();
-
-  //in order to not have the seconds labeled in the split views
-  // -> i pop out the last value of the array
-  //j.labels.set()
-  //j.labels.pop()    // it works but somehow there is a bug afterwards,...
   for (var c=0; c<j.channels.length; c++){
       // offset to the right each time we create a new panel
       j.y = j.y + (j.height * 1.05);
@@ -67,6 +62,23 @@ if (figureModel.panels.models[0].attributes.channels[0].active) {
 
 
 // adding Channel names with the corresponding color to panel.model[0] if the channels are active:
+
+function channelnames(figureID) {
+  j = figureModel.panels.models[figureID];
+  for (var c = 0; c < j.attributes.channels.length; c++) {
+    if (j.attributes.channels[c].active) {
+      var text = j.attributes.channels[c].label;
+      var color = j.attributes.channels[c].color;
+      var labels = [{
+        'text': text,
+        'size': 12,
+        'position': "leftvert",
+        'color': color
+      }]
+    j.add_labels(labels);
+    }
+  };
+}
 
 j = figureModel.panels.models[0];
 for (var c = 0; c < j.attributes.channels.length; c++) {
