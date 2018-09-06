@@ -58,8 +58,30 @@ figureModel.panels.models.forEach(p => {
   };
 });
 
-// this is just a test line
+// simple if sentence
+if (figureModel.panels.models[0].attributes.channels[0].active) {
+  text = "Testphrase has been true"
+}else {
+    text = "Testphrase has been false"
+}
 
+
+// adding Channel names with the corresponding color to panel.model[0] if the channels are active:
+
+j = figureModel.panels.models[0];
+for (var c = 0; c < j.attributes.channels.length; c++) {
+  if (j.attributes.channels[c].active) {
+    var text = j.attributes.channels[c].label;
+    var color = j.attributes.channels[c].color;
+    var labels = [{
+      'text': text,
+      'size': 12,
+      'position': "leftvert",
+      'color': color
+    }]
+  j.add_labels(labels);
+  }
+};
 
 // the code below deletes all labels of a picture
 figureModel.getSelected().forEach(p => {
