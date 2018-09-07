@@ -77,11 +77,39 @@ function displaytime(ImageID, displaytimemode = "hrs:mins:secs") {
 // images of consecutive timepoints
 function multitimepoint(ImageID, timepoints = 5, tIncrement = 1) {
   j = figureModel.panels.models[ImageID].toJSON();
+  //de-comment the line below in order to have z-projections of
+  //multiple timepoints
+  //figureModel.panels.models[ImageID].set({'z_projection': "true"})
   var left = j.x;
   var top = j.y;
   var columnCount = timepoints;
   panelCount = 1;
   for (var t=1; t<timepoints; t+=tIncrement){
+      // offset to the right each time we create a new panel
+      j.x = left + ((panelCount % columnCount) * j.width * 1.05);
+      j.y = top + (parseInt(panelCount / columnCount) * j.height * 1.05);
+      panelCount++;
+      // Increment T
+      j.theT = t;
+      //var delta_t = j.get(""time"")
+      // create new panel from json
+      figureModel.panels.create(j);
+  };
+}
+
+// the funciton multitimepoint2 generates additionally a z-projection of timepoint 0
+function multitimepoint2(ImageID, timepoints = 5, tIncrement = 1) {
+  j = figureModel.panels.models[ImageID].toJSON();
+
+  var left = j.x;
+  var top = j.y;
+  var columnCount = timepoints;
+  panelCount = 1;
+
+  for (var t=0; t<timepoints; t+=tIncrement){
+      if (t == 0) {
+        figureModel.panels.models[ImageID].set({'z_projection': "true"})
+      }
       // offset to the right each time we create a new panel
       j.x = left + ((panelCount % columnCount) * j.width * 1.05);
       j.y = top + (parseInt(panelCount / columnCount) * j.height * 1.05);
@@ -101,19 +129,16 @@ function maxprojection(ImageID) {
 }
 
 // What i want to do: have a maximum projection of a split view, and then
-// single slides of 5 consecutive timepoints
+// single slides of 4 consecutive timepoints
 var timepoints = 5;
 
-
-
-
-multitimepoint(0, timepoints);
+multitimepoint2(0, timepoints);
 for (var p = 0; p<(timepoints); p++) {
   splitview(p);
 };
 for (var p = 0; p<(timepoints); p++) {
   displaytime(p);
 };
-add_channelnames(0);
-add_channelnames(5);
-add_channelnames(6);
+// add_channelnames(0);
+// add_channelnames(5);
+// add_channelnames(6);
