@@ -37,19 +37,29 @@ function splitview(ImageID) {
 }
 
 // working on the next function, there is a bug in the function above, need to write a new one
-
-figureModel.panels.models[0].attributes.channels[0].active = false
+// the function below does not solve the bug -> once both functions are called, although the pictures
+// look exactly how i want them, the settings are always as the settings last used: in the case of the function
+// below: it always shows channel0 and channel1 true
 
 function splitview2(ImageID) {
-  var p = figureModel.panels.models[ImageID].toJSON();
-  var j = p.
+  var pB = figureModel.panels.models[ImageID].toJSON();
+  pB.channels[0].active = true;
+  pB.channels[1].active = false;
+  pB.y = pB.y + (pB.height * 1.05);
+  figureModel.panels.create(pB);
 
-  
-  var j = figureModel.panels.models[0].attributes.channels[0].active = true;
-  j.y = j.y + (j.height * 1.05);
-  figureModel.panels.create(j);
+  var pC = figureModel.panels.models[ImageID].toJSON();
+  pC.channels[0].active = false;
+  pC.channels[1].active = true;
+  pC.y = pB.y + (pB.height * 1.05);
+  figureModel.panels.create(pC);
+
+  var pA = figureModel.panels.models[ImageID];
+  pA.attributes.channels[0].active = true;
+  pA.attributes.channels[1].active = true;
 
 }
+
 
 // this function displays the time of the choosen image
 function displaytime(ImageID, displaytimemode = "hrs:mins:secs") {
