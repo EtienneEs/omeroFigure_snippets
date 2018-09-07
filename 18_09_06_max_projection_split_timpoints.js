@@ -158,6 +158,6 @@ for (var p = 1; p<(timepoints); p++) {
   toplabel(p, "single z-slice");
 };
 
-// add_channelnames(0);
-// add_channelnames(5);
-// add_channelnames(6);
+add_channelnames(0);
+add_channelnames(timepoints+1);
+add_channelnames(timepoints + 2);
