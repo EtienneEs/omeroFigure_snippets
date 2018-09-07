@@ -73,6 +73,18 @@ function displaytime(ImageID, displaytimemode = "hrs:mins:secs") {
   j.add_labels(labels);
 }
 
+// adds a toplabel to the choosen picture
+function toplabel(ImageID, label) {
+  var j = figureModel.panels.models[ImageID];
+  var labels = [{
+    'text' : label,
+    'size' : 12,
+    'position' : "top",
+    'color' : "ffffff"
+  }]
+  j.add_labels(labels);
+}
+
 // this function generates a copy of the first time point, then generates multiple
 // images of consecutive timepoints
 function multitimepoint(ImageID, timepoints = 5, tIncrement = 1) {
@@ -139,6 +151,13 @@ for (var p = 0; p<(timepoints); p++) {
 for (var p = 0; p<(timepoints); p++) {
   displaytime(p);
 };
+
+toplabel(0, "maximum projection");
+
+for (var p = 1; p<(timepoints); p++) {
+  toplabel(p, "single z-slice");
+};
+
 // add_channelnames(0);
 // add_channelnames(5);
 // add_channelnames(6);
