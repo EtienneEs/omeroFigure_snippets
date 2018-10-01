@@ -11,7 +11,7 @@ function add_channelnames(ImageID) {
       var color = j.attributes.channels[c].color;
       var labels = [{
         'text': text,
-        'size': 12,
+        'size': 10,
         'position': "leftvert",
         'color': color
       }]
@@ -28,8 +28,10 @@ function splitview(ImageID) {
       // offset below each time we create a new panel
       j.y = j.y + (j.height * 1.05);
       // turn all channels off except for the current index
-      j.channels.forEach((ch, i) => {
-          ch.active = i === c;
+      j.channels = j.channels.map((ch, i) => {
+          var newc = Object.assign({}, ch);
+          newc.active = i === c;
+          return newc;
       });
       // create new panel from json
       figureModel.panels.create(j);
@@ -41,24 +43,24 @@ function splitview(ImageID) {
 // look exactly how i want them, the settings are always as the settings last used: in the case of the function
 // below: it always shows channel0 and channel1 true
 
-function splitview2(ImageID) {
-  var pB = figureModel.panels.models[ImageID].toJSON();
-  pB.channels[0].active = true;
-  pB.channels[1].active = false;
-  pB.y = pB.y + (pB.height * 1.05);
-  figureModel.panels.create(pB);
-
-  var pC = figureModel.panels.models[ImageID].toJSON();
-  pC.channels[0].active = false;
-  pC.channels[1].active = true;
-  pC.y = pB.y + (pB.height * 1.05);
-  figureModel.panels.create(pC);
-
-  var pA = figureModel.panels.models[ImageID];
-  pA.attributes.channels[0].active = true;
-  pA.attributes.channels[1].active = true;
-
-}
+// function splitview2(ImageID) {
+//   var pB = figureModel.panels.models[ImageID].toJSON();
+//   pB.channels[0].active = true;
+//   pB.channels[1].active = false;
+//   pB.y = pB.y + (pB.height * 1.05);
+//   figureModel.panels.create(pB);
+//
+//   var pC = figureModel.panels.models[ImageID].toJSON();
+//   pC.channels[0].active = false;
+//   pC.channels[1].active = true;
+//   pC.y = pB.y + (pB.height * 1.05);
+//   figureModel.panels.create(pC);
+//
+//   var pA = figureModel.panels.models[ImageID];
+//   pA.attributes.channels[0].active = true;
+//   pA.attributes.channels[1].active = true;
+//
+// }
 
 
 // this function displays the time of the choosen image
@@ -78,7 +80,7 @@ function toplabel(ImageID, label) {
   var j = figureModel.panels.models[ImageID];
   var labels = [{
     'text' : label,
-    'size' : 12,
+    'size' : 10,
     'position' : "top",
     'color' : "ffffff"
   }]
@@ -158,6 +160,6 @@ for (var p = 1; p<(timepoints); p++) {
   toplabel(p, "single z-slice");
 };
 
-add_channelnames(0);
-add_channelnames(timepoints+1);
-add_channelnames(timepoints + 2);
+//add_channelnames(0);
+//add_channelnames(timepoints+1);
+//add_channelnames(timepoints + 2);
