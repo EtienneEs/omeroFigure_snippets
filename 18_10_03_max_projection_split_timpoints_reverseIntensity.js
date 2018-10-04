@@ -1,3 +1,11 @@
+/*
+This little script splits
+
+*/
+
+
+
+
 var displaytimemode = "hrs:mins:secs";
 var timepoints = 5;
 
@@ -80,7 +88,6 @@ function multitimepoint(ImageID, timepoints = 5, tIncrement = 1) {
   for (var t=1; t<timepoints; t+=tIncrement){
       // offset to the right each time we create a new panel
       j.x = left + ((panelCount % columnCount) * j.width * 1.05);
-      j.y = top + (parseInt(panelCount / columnCount) * j.height * 1.05);
       panelCount++;
       // Increment T
       j.theT = t;
@@ -105,7 +112,6 @@ function multitimepoint2(ImageID, timepoints = 5, tIncrement = 1) {
       }
       // offset to the right each time we create a new panel
       j.x = left + ((panelCount % columnCount) * j.width * 1.05);
-      j.y = top + (parseInt(panelCount / columnCount) * j.height * 1.05);
       panelCount++;
       // Increment T
       j.theT = t;
