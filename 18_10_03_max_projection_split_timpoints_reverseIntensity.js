@@ -1,6 +1,10 @@
 /*
-This little script splits
-
+This little script generates a Maximum projeciton of the open Image.
+Further it generates single z-slice images of the timepoints 0 to 5
+and it will generate inverted (white) splitviews of the different channels.
+Additionally the time will be displayed in the top right corner. Both, the number of
+generated timepoints and the display-mode of the time can be easily changed
+in the variables below.
 */
 
 
@@ -8,6 +12,11 @@ This little script splits
 
 var displaytimemode = "hrs:mins:secs";
 var timepoints = 5;
+
+
+
+// for scripting purpose
+var timepoints = timepoints + 1;
 
 // this function adds the (predefined) channelnames of the choosen image
 

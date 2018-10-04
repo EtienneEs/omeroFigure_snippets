@@ -1,5 +1,22 @@
+/*
+This little script generates a Maximum projeciton of the open Image.
+Further it generates single z-slice images of the timepoints 0 to 5
+and it will generate splitviews of the different channels. Additionally
+the time will be displayed in the top right corner. Both, the number of
+generated timepoints and the display-mode of the time can be easily changed
+in the variables below.
+*/
+
+
+
 var displaytimemode = "hrs:mins:secs";
 var timepoints = 5;
+
+
+// for scripting purpose
+var timepoints = timepoints + 1;
+
+
 
 // this function adds the (predefined) channelnames of the choosen image
 
@@ -37,31 +54,6 @@ function splitview(ImageID) {
       figureModel.panels.create(j);
   };
 }
-
-// working on the next function, there is a bug in the function above, need to write a new one
-// the function below does not solve the bug -> once both functions are called, although the pictures
-// look exactly how i want them, the settings are always as the settings last used: in the case of the function
-// below: it always shows channel0 and channel1 true
-
-// function splitview2(ImageID) {
-//   var pB = figureModel.panels.models[ImageID].toJSON();
-//   pB.channels[0].active = true;
-//   pB.channels[1].active = false;
-//   pB.y = pB.y + (pB.height * 1.05);
-//   figureModel.panels.create(pB);
-//
-//   var pC = figureModel.panels.models[ImageID].toJSON();
-//   pC.channels[0].active = false;
-//   pC.channels[1].active = true;
-//   pC.y = pB.y + (pB.height * 1.05);
-//   figureModel.panels.create(pC);
-//
-//   var pA = figureModel.panels.models[ImageID];
-//   pA.attributes.channels[0].active = true;
-//   pA.attributes.channels[1].active = true;
-//
-// }
-
 
 // this function displays the time of the choosen image
 function displaytime(ImageID, displaytimemode = "hrs:mins:secs") {
@@ -101,7 +93,6 @@ function multitimepoint(ImageID, timepoints = 5, tIncrement = 1) {
   for (var t=1; t<timepoints; t+=tIncrement){
       // offset to the right each time we create a new panel
       j.x = left + ((panelCount % columnCount) * j.width * 1.05);
-      j.y = top + (parseInt(panelCount / columnCount) * j.height * 1.05);
       panelCount++;
       // Increment T
       j.theT = t;
@@ -126,7 +117,6 @@ function multitimepoint2(ImageID, timepoints = 5, tIncrement = 1) {
       }
       // offset to the right each time we create a new panel
       j.x = left + ((panelCount % columnCount) * j.width * 1.05);
-      j.y = top + (parseInt(panelCount / columnCount) * j.height * 1.05);
       panelCount++;
       // Increment T
       j.theT = t;
